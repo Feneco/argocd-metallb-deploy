@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://metallb.github.io/metallb
+    chart: metallb
+    targetRevision: 0.16.1
+    helm:
+      releaseName: metallb
+      values: |
+        # paste the contents of values.yaml here
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metallb-system
+  syncPolicy:
+    syncOptions:
+      - ServerSideApply=true   # ECK CRDs are too large for client-side apply
+      - CreateNamespace=false
+    # no automated sync, no prune yet

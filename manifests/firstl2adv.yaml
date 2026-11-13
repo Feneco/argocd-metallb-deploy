@@ -1,0 +1,12 @@
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+  name: firstl2adv
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - first-pool
+  - second-pool

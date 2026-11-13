@@ -1,0 +1,27 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+spec:
+  addresses:
+  - 10.7.0.64-10.7.0.74
+  autoAssign: true
+  avoidBuggyIPs: true
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: second-pool
+  namespace: metallb-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    argocd.argoproj.io/sync-options: Prune=false,Delete=false
+spec:
+  addresses:
+  - 10.5.26.0/24
+  autoAssign: true
+  avoidBuggyIPs: true
